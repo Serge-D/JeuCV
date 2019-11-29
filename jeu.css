@@ -1,1 +1,70 @@
 /* CSS du Jeu */
+
+/* *{
+    margin : 0;
+    padding : 0;
+}  */
+/*Header */
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+    font-size: 25px;
+    font-style: italic;
+    color: black;
+}
+
+h1 {    
+    text-align: center;
+    margin-block-start: 0;
+}
+
+
+
+
+/*Section*/
+
+#start{
+    align-items: center;
+    background-color: #000000;
+    border: 2px solid white;
+    border-radius: 100px;
+    bottom: 125px;
+    display: flex;
+    font-size: 2em;
+    height: 175px;
+    justify-content: center;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    opacity: 0.7;
+    width: 175px;
+    right: 0;
+    color: whitesmoke;
+    text-decoration: none;
+    text-transform: uppercase;
+    }
+
+
+
+
+#fenetre{
+    background-color: greenyellow;
+    width: 80%;
+    border: 2px solid black;
+    height: 70vh;
+    margin: 5% 10%;
+    position: relative;
+}
+
+
+#img1{
+    position: absolute;
+    height: 100px;
+}
