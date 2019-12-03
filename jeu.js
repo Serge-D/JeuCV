@@ -4,13 +4,16 @@
 
 var boutonStart =  window.document.getElementById('start');
 var fenetreDeJeu = window.document.getElementById('fenetre');
+var fenetreStatut = window.document.getElementById('statut');
 
 fenetreDeJeu.style.display = 'none';
+fenetreStatut.style.display = 'none';
 
 boutonStart.addEventListener("click",function(){
     if(fenetreDeJeu.style.display == 'none'){
         boutonStart.style.display = 'none';
         fenetreDeJeu.style.display = "";
+        fenetreStatut.style.display = "";
     }
 })
 
@@ -59,8 +62,8 @@ window.addEventListener("load", function(){
             break;
 
             case 40: 
-            if(parseInt(imagePositionY)>=580){
-                imagePositionY=570;
+            if(parseInt(imagePositionY)>=650){
+                imagePositionY=640;
             }
             imagePositionY +=10;
             imageObelix.style.top= imagePositionY +"px";
