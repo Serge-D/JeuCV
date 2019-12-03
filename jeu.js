@@ -2,7 +2,7 @@
 
 // Switch des deux div Start et fenetre
 
-var boutonStart =  window.document.getElementById('start');
+var boutonStart =  window.document.getElementById('boutonstart');
 var fenetreDeJeu = window.document.getElementById('fenetre');
 var fenetreStatut = window.document.getElementById('statut');
 

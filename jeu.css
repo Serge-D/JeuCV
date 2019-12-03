@@ -112,16 +112,16 @@ section{
     
 }
 
-#start{
-    height: 180px;
-    width: 180px;
+#boutonstart{
+    height: 210px;
+    width: 210px;
     background-image: url(start.png);
     bottom: 125px;
     margin-left: auto;
     margin-right: auto;
     left: 0;
     right: 0;
-    font-size: 2.1em;
+    font-size: 1.8em;
     color: black;
     text-shadow: 7px 9px 4px black;
     display: flex;
