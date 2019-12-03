@@ -53,8 +53,8 @@ h1 {
     }
 }
 /* .fantome2{
-    animation-duration: 10s;
-    animation-name: slide;
+    animation-duration: 30s;
+    animation-name: inverse;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     height: 70px;
@@ -65,9 +65,12 @@ h1 {
     from {
         margin-left: 100%;
     }
-
+    35%{
+        height: 140px;
+        width: 140px;
+    }
     to{
-        margin-left: 0;
+        margin-left: -5%;
     }
 } */
 /*Section*/
@@ -110,27 +113,25 @@ section{
 }
 
 #start{
-    align-items: center;
-    background-color: #000000;
-    border: 2px solid white;
-    border-radius: 100px;
+    height: 180px;
+    width: 180px;
+    background-image: url(start.png);
     bottom: 125px;
-    display: flex;
-    font-size: 2em;
-    height: 175px;
-    justify-content: center;
-    left: 0;
     margin-left: auto;
     margin-right: auto;
-    position: absolute;
-    opacity: 0.7;
-    width: 175px;
+    left: 0;
     right: 0;
-    color: whitesmoke;
-    text-decoration: none;
+    font-size: 2.1em;
+    color: black;
+    text-shadow: 7px 9px 4px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    opacity: 0.8;
+    font-weight: bold;
     text-transform: uppercase;
     }
-
 
 
 
