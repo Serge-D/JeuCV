@@ -21,7 +21,7 @@ ul {
 a{
     text-decoration: none;
     font-size: 25px;
-    font-family: 'Comic Sans MS',serif;
+    font-style: italic;
     color: white;
 }
 
@@ -53,15 +53,14 @@ h1 {
         margin-left: 100%;
     }
 }
-.fantome2{
-    animation-duration: 40s;
+/* .fantome2{
+    animation-duration: 30s;
     animation-name: inverse;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     height: 70px;
     width: 70px;
     position: absolute;
-    opacity: 0.3;
 }
 @keyframes inverse {
     from {
@@ -74,7 +73,7 @@ h1 {
     to{
         margin-left: -5%;
     }
-}
+} */
 /*Section*/
 
 section{
@@ -84,19 +83,7 @@ section{
 
 
 #regles{
-    position: absolute;
-    height: 200px;
-    width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    right: 0;
-    left: 0;
-    top: 270px;
-    border: 2px solid white;
-    border-radius: 20px;
-    color: white;
-    opacity: 0.7;
-    text-align: center;
+    height: 250px;
 }
 
 #statut{
@@ -166,7 +153,8 @@ section{
 }
 
 
-/* #img1{
+#img1{
     position: absolute;
-    height: 400px;
-} */
+    height: 100px;
+}
+

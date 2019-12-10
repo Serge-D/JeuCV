@@ -54,14 +54,13 @@ h1 {
     }
 }
 .fantome2{
-    animation-duration: 40s;
+    animation-duration: 30s;
     animation-name: inverse;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     height: 70px;
     width: 70px;
     position: absolute;
-    opacity: 0.3;
 }
 @keyframes inverse {
     from {
@@ -166,7 +165,8 @@ section{
 }
 
 
-/* #img1{
+#img1{
     position: absolute;
-    height: 400px;
-} */
+    height: 100px;
+}
+

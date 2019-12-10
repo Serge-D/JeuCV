@@ -84,7 +84,7 @@ window.addEventListener("load", function(){
             imagePositionX += 10;
             container.style.left= imagePositionX +"px";
             // console.log(imagePositionY);
-            imagedivx -= 220;
+            imagedivx -= 200;
             imageDetective.style.left=imagedivx+"px";
             if(imagedivx <=320){
                 imagedivx = 0;

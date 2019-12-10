@@ -52,7 +52,7 @@ window.addEventListener("load", function(){
             // if(parseInt(imagePositionX) <= 0){
             //     imagePositionX = 10;
             // }
-            imagePositionX -= 10;
+            imagePositionX -= 2;
             container.style.left = imagePositionX + "px";
             // console.log(imagePositionX);
             imagedivx -= 435;
@@ -67,7 +67,7 @@ window.addEventListener("load", function(){
             // if(parseInt(imagePositionY)<=0){
             //     imagePositionY = 10;
             // }
-            imagePositionY -= 10;
+            imagePositionY -= 2;
             container.style.top= imagePositionY + "px";
             // console.log(imagePositionX);
             imagedivx -= 0;
@@ -81,10 +81,10 @@ window.addEventListener("load", function(){
             // if(parseInt(imagePositionX)>=1000){
             //     imagePositionX = 990;
             // }
-            imagePositionX += 10;
+            imagePositionX += 2;
             container.style.left= imagePositionX +"px";
             // console.log(imagePositionY);
-            imagedivx -= 220;
+            imagedivx -= 215;
             imageDetective.style.left=imagedivx+"px";
             if(imagedivx <=320){
                 imagedivx = 0;
@@ -95,7 +95,7 @@ window.addEventListener("load", function(){
             // if(parseInt(imagePositionY)>=650){
             //     imagePositionY=640;
             // }
-            imagePositionY +=10;
+            imagePositionY +=2;
             container.style.top= imagePositionY +"px";
             // console.log(imagePositionY);
             imagedivx -= 318;

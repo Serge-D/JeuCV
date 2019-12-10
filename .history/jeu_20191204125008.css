@@ -21,7 +21,7 @@ ul {
 a{
     text-decoration: none;
     font-size: 25px;
-    font-family: 'Comic Sans MS',serif;
+    font-style: italic;
     color: white;
 }
 
@@ -53,15 +53,14 @@ h1 {
         margin-left: 100%;
     }
 }
-.fantome2{
-    animation-duration: 40s;
+/* .fantome2{
+    animation-duration: 30s;
     animation-name: inverse;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     height: 70px;
     width: 70px;
     position: absolute;
-    opacity: 0.3;
 }
 @keyframes inverse {
     from {
@@ -74,29 +73,12 @@ h1 {
     to{
         margin-left: -5%;
     }
-}
+} */
 /*Section*/
 
 section{
     display: flex;
     flex-direction: row;
-}
-
-
-#regles{
-    position: absolute;
-    height: 200px;
-    width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    right: 0;
-    left: 0;
-    top: 270px;
-    border: 2px solid white;
-    border-radius: 20px;
-    color: white;
-    opacity: 0.7;
-    text-align: center;
 }
 
 #statut{
@@ -132,30 +114,31 @@ section{
 }
 
 #boutonstart{
-    height: 200px;
-    width: 200px;
-    border-radius: 125px;
-    background-color: black;
-    position: absolute;
-    right: 0;
-    left: 0;
-    top: 600px;
-    opacity: 0.5;
+    height: 210px;
+    width: 210px;
+    background-image: url(start.png);
+    bottom: 125px;
     margin-left: auto;
     margin-right: auto;
-    border: 2px solid white;
+    left: 0;
+    right: 0;
+    font-size: 1.8em;
+    color: black;
+    text-shadow: 7px 9px 4px black;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 3em;
-    color: whitesmoke;
+    justify-content: center;
+    position: absolute;
+    opacity: 0.8;
+    font-weight: bold;
+    text-transform: uppercase;
     }
 
 
 
 #fenetre{
-    /* background-image: url(sergemap.png); */
-    overflow: hidden;
+    background-image: url(newhall.jpg);
+    background-repeat: no-repeat;
     margin-left: 0;
     margin-right: auto;
     margin-top: 90px;
@@ -166,7 +149,8 @@ section{
 }
 
 
-/* #img1{
+#img1{
     position: absolute;
-    height: 400px;
-} */
+    height: 100px;
+}
+
