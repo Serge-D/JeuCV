@@ -40,7 +40,7 @@ restart.addEventListener("click",function(){
 
  var fantome = new FabriqueDeFantome();
 
- var imageFantome = new Image(); //possibilité de mettre ca dans la fonction constructeur
+ var imageFantome = new Image();
  imageFantome.src = fantome.src;
  imageFantome.height = fantome.hauteur; 
  imageFantome.width = fantome.largeur;
@@ -48,10 +48,7 @@ restart.addEventListener("click",function(){
 //  document.body.appendChild(imageFantome); // comment la mettre dans la div FenetreDeJeu
 //  document.body.fenetreDeJeu.appendChild(imageFantome); Erreur indiqué dans la console
 
-//var creationimage = document.createElement(img);
-// creationimage.src = imageFantome.src
-// fenetreDeJeu.appenChild(creationimage)
-
+//var creationimage = document.createElement(img)
 
 //Mouvement du personnage
 
@@ -87,7 +84,7 @@ window.addEventListener("load", function(){
             imagePositionX -= 10;
             container.style.left = imagePositionX + "px";
             // console.log(imagePositionX);
-             imagedivx -= 435;
+            imagedivx -= 435;
             imageDetective.style.left=imagedivx+"px";
             if(imagedivx <=522){
                 imagedivx = 0;

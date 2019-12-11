@@ -40,7 +40,7 @@ restart.addEventListener("click",function(){
 
  var fantome = new FabriqueDeFantome();
 
- var imageFantome = new Image(); //possibilité de mettre ca dans la fonction constructeur
+ var imageFantome = new Image(); 
  imageFantome.src = fantome.src;
  imageFantome.height = fantome.hauteur; 
  imageFantome.width = fantome.largeur;
@@ -87,7 +87,7 @@ window.addEventListener("load", function(){
             imagePositionX -= 10;
             container.style.left = imagePositionX + "px";
             // console.log(imagePositionX);
-             imagedivx -= 435;
+            imagedivx -= 435;
             imageDetective.style.left=imagedivx+"px";
             if(imagedivx <=522){
                 imagedivx = 0;
