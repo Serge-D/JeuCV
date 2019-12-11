@@ -6,6 +6,7 @@ var boutonStart =  window.document.getElementById('boutonstart');
 var fenetreDeJeu = window.document.getElementById('fenetre');
 var fenetreStatut = window.document.getElementById('statut');
 var fenetreRegles = window.document.getElementById('regles');
+var restart = window.document.getElementById('restart');
 
 fenetreDeJeu.style.display = 'none';
 fenetreStatut.style.display = 'none';
@@ -19,7 +20,33 @@ boutonStart.addEventListener("click",function(){
     }
 })
 
-// x et y largeur et hauteur 
+
+//ReStart
+restart.addEventListener("click",function(){
+    document.location.reload();
+})
+
+
+
+// Fonction Constructeur pour génerer les fantomes
+ var FabriqueDeFantome = function(){
+    this.hauteur = '60px';
+    this.largeur = '100px';
+    this.src = 'fantome-face.png';
+    this.position = 'absolute';
+    this.x = 0; //propriété pour le mouvement
+    this.y = 0; //propriété pour le mouvement
+ }   
+
+ var fantome = new FabriqueDeFantome;
+
+ var imageFantome = new Image();
+ imageFantome.src = fantome.src;
+ imageFantome.height = fantome.hauteur;
+ imageFantome.width = fantome.largeur;
+ imageFantome.position = fantome.position;
+//  document.body.appendChild(imageFantome); // comment la mettre dans la div FenetreDeJeu
+//  document.body.fenetreDeJeu.appendChild(imageFantome); Erreur indiqué dans la console
 
 //Mouvement du personnage
 
