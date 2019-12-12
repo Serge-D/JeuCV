@@ -1,0 +1,166 @@
+/* CSS du Jeu */
+
+body{
+    background-image: url(fond1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    
+}
+
+/*Header */
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style-type: none;
+    
+}
+
+a{
+    text-decoration: none;
+    font-size: 25px;
+    font-family: 'Comic Sans MS',serif;
+    color: white;
+}
+
+h1 {    
+    text-align: center;
+    margin-block-start: 0;
+    color: white;
+}
+
+.fantome1{
+    animation-duration: 40s;
+    animation-name: slide;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    opacity: 0.3;
+}
+@keyframes slide {
+    from {
+        margin-left: -5%;
+    }
+        35%{
+            height: 140px;
+            width: 140px;
+        }
+    to{
+        margin-left: 100%;
+    }
+}
+.fantome2{
+    animation-duration: 40s;
+    animation-name: inverse;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    opacity: 0.3;
+}
+@keyframes inverse {
+    from {
+        margin-left: 100%;
+    }
+    35%{
+        height: 140px;
+        width: 140px;
+    }
+    to{
+        margin-left: -5%;
+    }
+}
+/*Section*/
+
+section{
+    display: flex;
+    flex-direction: row;
+}
+
+
+#regles{
+    position: absolute;
+    height: 200px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    right: 0;
+    left: 0;
+    top: 270px;
+    border: 2px solid white;
+    border-radius: 20px;
+    color: white;
+    opacity: 0.7;
+    text-align: center;
+}
+
+#statut{
+    height: 755px;
+    margin-top: 90px;
+    /* background-color: white; */
+    width: 350px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    /* opacity: 0.4; */
+    border-radius: 10px;
+    
+}
+
+#statut h2{
+    color: white;
+    
+}
+
+#pv img {
+    height: 20px;
+    width: 20px;
+}
+
+
+#competences{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#boutonstart{
+    height: 200px;
+    width: 200px;
+    border-radius: 125px;
+    background-color: black;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 600px;
+    opacity: 0.5;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    color: whitesmoke;
+    }
+
+
+
+#fenetre{
+    overflow: hidden;
+    margin-left: 0;
+    margin-right: auto;
+    margin-top: 90px;
+    width: 1185px;
+    border: 2px solid black;
+    height: 738px;
+    position: relative;
+}
+
