@@ -12,6 +12,12 @@ var container = window.document.getElementById('container');
 var imageDetective = window.document.getElementById('img1');
 var fenetreDeFond = window.document.getElementById('fenetredefond');
 
+//tableau balle et tableau fantome
+var tableauBalle = [];
+var tableauFantome = [];
+
+
+
 //Direction de Balle
 
 var directionDeBalle = null;
@@ -51,7 +57,7 @@ restart.addEventListener("click",function(){
 
 
 // Fonction Constructeur pour génerer les fantomes
- var FabriqueDeFantome = function(){
+ var FabriqueDeFantome = function(fantomeId){
      
     this.fantome = new Image();
     this.fantome.style.height = "121px";
@@ -61,7 +67,15 @@ restart.addEventListener("click",function(){
     this.fantome.style.left = getRandomInt(800)+"px";
     this.fantome.style.top = getRandomInt(500)+"px";
     this.fantome.src = 'fantome-face.png';
-
+    this.id = "fantome_" + fantomeId
+    this.clean = function(){
+        var that = this;
+        this.fantome.parentNode.removeChild(this.fantome);
+        var index = tableauFantome.findIndex(function(o){
+            return o.id === that.id;
+       })
+       if (index !== -1) tableauFantome.splice(index, 1);
+    }.bind(this)
     // this.directions = [-1, 1][getRandomInt(2)]
     this.direction = getRandomIntInterval(1, 5);
     this.limit = 1100;
@@ -114,7 +128,8 @@ restart.addEventListener("click",function(){
     let i = 1
     let interval = setInterval(function(){
     if(i<=10){
-            new FabriqueDeFantome()
+            tableauFantome.push(new FabriqueDeFantome(i));
+            console.log(tableauFantome)
             i++ 
         } else {
             clearInterval(interval)
@@ -146,30 +161,81 @@ var FabriqueDeBalle = function(){
     }.bind(this)
     
     this.cleanBalle = null;
+    this.checkCollision = null;
 
     this.removeBalle = function(){
         if(parseInt(this.balle.style.top) < 0){
             this.balle.parentNode.removeChild(this.balle);
+            tableauBalle.slice()
             clearInterval(this.cleanBalle)
+            clearInterval(this.checkCollision);
+
         }
         if(parseInt(this.balle.style.top) > 750){
             this.balle.parentNode.removeChild(this.balle);
             clearInterval(this.cleanBalle)
+            clearInterval(this.checkCollision);
+
         }
         if(parseInt(this.balle.style.left) < 0){
             this.balle.parentNode.removeChild(this.balle);
             clearInterval(this.cleanBalle)
+            clearInterval(this.checkCollision);
+
         }
         if(parseInt(this.balle.style.left) > 1200){
             this.balle.parentNode.removeChild(this.balle);
             clearInterval(this.cleanBalle)
+            clearInterval(this.checkCollision);
+
         }
+    }.bind(this)
+
+    this.collisions = function(){
+        var that = this;
+        // console.log(this)
+        let rect1 = {
+            x : parseInt(this.balle.style.left),
+            y : parseInt(this.balle.style.top),
+            width : 20,
+            height : 20
+        };
+        tableauFantome.forEach(function(elt){
+            // console.log(that)
+            let rect2 = {
+                x : parseInt(elt.fantome.style.left),
+                y : parseInt(elt.fantome.style.top),
+                width : parseInt(elt.fantome.style.width),
+                height : parseInt(elt.fantome.style.height)
+            }
+            if (rect1.x < rect2.x + rect2.width &&
+                rect1.x + rect1.width > rect2.x &&
+                rect1.y < rect2.y + rect2.height &&
+                rect1.height + rect1.y > rect2.y) {
+                    alert('collisions');
+                    that.clean();
+                    elt.clean();
+                    
+                }
+
+        })
+    }.bind(this)
+
+    this.clean = function(){
+        // console.log(this)
+        
+        clearInterval(this.checkCollision);
+        clearInterval(this.cleanBalle);
+        this.balle.parentNode.removeChild(this.balle);
+
     }.bind(this)
 
     fenetreDeJeu.appendChild(this.balle);
     requestAnimationFrame(this.tir);
     this.cleanBalle = setInterval(this.removeBalle,1000);
-    return this.balle;
+    this.checkCollision = setInterval(this.collisions,200);
+
+    return this;
  }  
 
 //Changement de fenetre
@@ -323,11 +389,12 @@ var FabriqueDeBalle = function(){
             break;
 
             case 32: 
-            var balle = new FabriqueDeBalle();
+            new FabriqueDeBalle();
+            // console.log(tableauBalle);
 
 
             break;
-            
+
         }
     }
 
