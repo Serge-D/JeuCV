@@ -1,6 +1,7 @@
 'use strict'
 
-// Switch des div lors du click sur Start
+window.addEventListener("load", function(){
+// Mes Id stockées dans des variables
 
 var boutonStart =  window.document.getElementById('boutonstart');
 var fenetreDeJeu = window.document.getElementById('fenetre');
@@ -9,7 +10,13 @@ var fenetreRegles = window.document.getElementById('regles');
 var restart = window.document.getElementById('restart');
 var container = window.document.getElementById('container');
 var imageDetective = window.document.getElementById('img1');
+var fenetreDeFond = window.document.getElementById('fenetredefond');
 
+//Direction de Balle
+
+var directionDeBalle = null;
+
+//fonctions pour generer des chiffres aléatoires pour ma Fabrique de fantomes
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 };
@@ -19,6 +26,9 @@ function getRandomIntInterval(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
+// Gestion de la page d'accueil lorsqu'on appuie sur le bouton start
 
 fenetreDeJeu.style.display = 'none';
 fenetreStatut.style.display = 'none';
@@ -52,7 +62,7 @@ restart.addEventListener("click",function(){
     this.fantome.style.top = getRandomInt(500)+"px";
     this.fantome.src = 'fantome-face.png';
 
-    this.directions = [-1, 1][getRandomInt(2)]
+    // this.directions = [-1, 1][getRandomInt(2)]
     this.direction = getRandomIntInterval(1, 5);
     this.limit = 1100;
     this.limit2 = 650;
@@ -96,12 +106,7 @@ restart.addEventListener("click",function(){
     return this;
 }
 
-//  var fantome = new FabriqueDeFantome;
-//  console.log("-------------------------")
-//  console.log(fantome)
-//  console.log("-------------------------")
 
-//  fantome.animation();
  
 
 //  Apparition de fantomes
@@ -130,15 +135,56 @@ var FabriqueDeBalle = function(){
     this.balle.src = 'attrapeFantome.png';
     this.balle.style.display="block";
     
+    this.directionDeBalle = directionDeBalle[0];
+    this.mvt = directionDeBalle[1]
+    this.tir = function(){
+        
+        var deplacement = parseInt(this.balle.style[this.directionDeBalle]) - 5*this.mvt ;
+        this.balle.style[this.directionDeBalle] = deplacement + "px";
+        
+        requestAnimationFrame(this.tir);
+    }.bind(this)
+    
+    this.cleanBalle = null;
+
+    this.removeBalle = function(){
+        if(parseInt(this.balle.style.top) < 0){
+            this.balle.parentNode.removeChild(this.balle);
+            clearInterval(this.cleanBalle)
+        }
+        if(parseInt(this.balle.style.top) > 750){
+            this.balle.parentNode.removeChild(this.balle);
+            clearInterval(this.cleanBalle)
+        }
+        if(parseInt(this.balle.style.left) < 0){
+            this.balle.parentNode.removeChild(this.balle);
+            clearInterval(this.cleanBalle)
+        }
+        if(parseInt(this.balle.style.left) > 1200){
+            this.balle.parentNode.removeChild(this.balle);
+            clearInterval(this.cleanBalle)
+        }
+    }.bind(this)
+
     fenetreDeJeu.appendChild(this.balle);
+    requestAnimationFrame(this.tir);
+    this.cleanBalle = setInterval(this.removeBalle,1000);
     return this.balle;
  }  
+
+//Changement de fenetre
+// position: absolute;
+// left: -1200px;
+// z-index: -1;
+
+
+ //Collisions 
+
 
 
 
 //Mouvement du personnage
 
-window.addEventListener("load", function(){
     
     container.style.position="absolute";
     container.style.height="160px";
@@ -158,32 +204,19 @@ window.addEventListener("load", function(){
     var imagedivy=0;
 
 
-    
-    // Projectile contre les fantomes
-
-    // var attrapeballe = window.document.getElementById('balle');
-    // attrapeballe.style.position = "absolute";
-    // attrapeballe.style.height = "20px";
-    // attrapeballe.style.left = (parseInt(container.style.left) + parseInt(container.style.width) /2) +"px";
-    // attrapeballe.style.top = (parseInt(container.style.top) + parseInt(container.style.height) /2) +"px";
-    // attrapeballe.style.display = 'none';
-
-
-
-
-
-
-
 
     window.onkeydown = function(event){
-        var code= event.keyCode;
+        var code = event.keyCode;
         
         switch(code){
             case 37 : 
-            // if(parseInt(imagePositionX) <= 0){
-            //     imagePositionX = 10;
-            // }
             // arrow left
+            if(parseInt(imagePositionX) <= 200){
+                imagePositionX = 180;
+            }
+            
+            directionDeBalle = ["left",1];
+
             imagePositionX -= 10;
             container.style.left = imagePositionX + "px";
             // console.log(imagePositionX);
@@ -198,9 +231,13 @@ window.addEventListener("load", function(){
             break;
 
             case 38 : 
-            // if(parseInt(imagePositionY)<=0){
-            //     imagePositionY = 10;
-            // }
+            //arrow top
+            if(parseInt(imagePositionY)<=0){
+                imagePositionY = 10;
+            }
+            
+            directionDeBalle = ["top",1];
+
             imagePositionY -= 10;
             container.style.top= imagePositionY + "px";
             // console.log(imagePositionX);
@@ -214,9 +251,37 @@ window.addEventListener("load", function(){
             break;
 
             case 39 : 
-            // if(parseInt(imagePositionX)>=1000){
-            //     imagePositionX = 990;
+            //arrow right
+            if(parseInt(imagePositionX)>=1010){
+                    imagePositionX = 1000;
+            }
+            if(parseInt(imagePositionX) >= 960 && parseInt(imagePositionY)>=440){
+                imagePositionX = 950;
+                imagePositionY = 440;
+            }
+            if(parseInt(imagePositionX) >= 980 && parseInt(imagePositionY)>=420){
+                imagePositionX = 970;
+                imagePositionY = 420;
+            }
+            if(parseInt(imagePositionX) >= 1010 && parseInt(imagePositionY)>=400){
+                imagePositionX = 1000;
+                imagePositionY = 400;
+            }
+            if(parseInt(imagePositionX) >= 1010 && parseInt(imagePositionY)>=60){
+                imagePositionX = 1010;
+                imagePositionY = 50;
+            }
+            // if(parseInt(imagePositionX) >= 960 && parseInt(imagePositionY)>=10){
+            //     imagePositionX = 950;
+            //     imagePositionY = 10;
             // }
+            // if(parseInt(imagePositionX) >= 950 && parseInt(imagePositionY)>=0){
+            //     imagePositionX = 940;
+            //     imagePositionY = 0;
+            // }
+
+            directionDeBalle = ["left",-1];
+            
             imagePositionX += 10;
             container.style.left= imagePositionX +"px";
             // console.log(imagePositionY);
@@ -230,9 +295,21 @@ window.addEventListener("load", function(){
             break;
 
             case 40: 
-            // if(parseInt(imagePositionY)>=650){
-            //     imagePositionY=640;
-            // }
+            //arrow bottom
+            if(parseInt(imagePositionY)>=460){
+                imagePositionY=450;
+            }
+            if(parseInt(imagePositionX) >= 1010 && parseInt(imagePositionY)>=400){
+                imagePositionX = 1010;
+                imagePositionY = 390;
+            }
+            if(parseInt(imagePositionX) >= 980 && parseInt(imagePositionY)>=430){
+                imagePositionX = 980;
+                imagePositionY = 420;
+            }
+            
+            directionDeBalle = ["top",-1];
+
             imagePositionY +=10;
             container.style.top= imagePositionY +"px";
             // console.log(imagePositionY);
