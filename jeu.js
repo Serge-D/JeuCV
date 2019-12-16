@@ -211,7 +211,7 @@ restart.addEventListener("click",function(){
  var creationFantome= function(){ 
     let i = 1
     let interval = setInterval(function(){
-    if(i<=10){
+    if(i<=20){
             tableauFantome.push(new FabriqueDeFantome(i));
             console.log(tableauFantome)
             i++ 
