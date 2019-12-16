@@ -131,6 +131,11 @@ section{
     
 }
 
+#competences img{
+    display: none;
+    align-content: center;
+}
+
 #boutonstart{
     height: 200px;
     width: 200px;

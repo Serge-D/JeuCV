@@ -11,10 +11,66 @@ var restart = window.document.getElementById('restart');
 var container = window.document.getElementById('container');
 var imageDetective = window.document.getElementById('img1');
 var fenetreDeFond = window.document.getElementById('fenetredefond');
+var monscore = window.document.getElementById("monscore");
+var score = 0;
+
 
 //tableau balle et tableau fantome
 var tableauBalle = [];
 var tableauFantome = [];
+
+
+//Sprite et Div Container 
+
+container.style.position="absolute";
+container.style.height="160px";
+container.style.width="73px";
+container.style.overflow="hidden";
+container.style.left= "1010px";
+container.style.top="240px";  
+
+
+imageDetective.style.position="absolute";
+imageDetective.style.width="333px";
+
+
+// Score 
+monscore.style.color = "white";
+monscore.style.fontSize = "1.5em";
+
+var calculscore = setInterval(function(){
+    if(score >= 400){
+        document.getElementById("logo1").style.display = "inline";
+    };
+    if(score >= 800){
+        document.getElementById("logo2").style.display = "inline";
+    };
+    if(score >= 1200){
+        document.getElementById("logo3").style.display = "inline";
+    };
+    if(score >= 1600){
+        document.getElementById("logo4").style.display = "inline";
+    };
+    if(score >= 2000){
+        document.getElementById("logo5").style.display = "inline";
+    };
+    if(score >= 2400){
+        document.getElementById("logo6").style.display = "inline";
+    };
+    if(score >= 2800){
+        document.getElementById("logo7").style.display = "inline";
+    }; 
+    if(score >= 3200){
+        document.getElementById("logo8").style.display = "inline";
+    };
+    score += 10
+    monscore.textContent = score;
+    
+    
+},1000);
+
+console.log(monscore);
+
 
 
 
@@ -81,6 +137,33 @@ restart.addEventListener("click",function(){
     this.limit = 1100;
     this.limit2 = 650;
 
+    this.checkCollision2 = null;
+
+    this.collisionsPersonnage = function(){
+        let perso1 = {
+            x : parseInt(container.style.left),
+            y : parseInt(container.style.top),
+            width : 73,
+            height : 160
+        };
+        // console.log(perso1.x);
+        // console.log(perso1.y);
+        tableauFantome.forEach(function(elt){
+            // console.log(that)
+            let perso2 = {
+                x : parseInt(elt.fantome.style.left),
+                y : parseInt(elt.fantome.style.top),
+                width : parseInt(elt.fantome.style.width),
+                height : parseInt(elt.fantome.style.height)
+            }
+            if (perso1.x < perso2.x + perso2.width &&
+                perso1.x + perso1.width > perso2.x &&
+                perso1.y < perso2.y + perso2.height &&
+                perso1.height + perso1.y > perso2.y){
+                    console.log('yo');
+                }
+    })}.bind(this)
+
     this.animation = function(){
     if (parseInt(this.fantome.style.left) <= this.limit){
 
@@ -117,6 +200,7 @@ restart.addEventListener("click",function(){
 
     fenetreDeJeu.appendChild(this.fantome);
     requestAnimationFrame(this.animation);
+    this.checkCollision = setInterval(this.collisionsPersonnage,50);
     return this;
 }
 
@@ -149,6 +233,7 @@ var FabriqueDeBalle = function(){
     this.balle.style.top = (parseInt(container.style.top) + parseInt(container.style.height) /2) +"px";
     this.balle.src = 'attrapeFantome.png';
     this.balle.style.display="block";
+    this.tirseconde = true;
     
     this.directionDeBalle = directionDeBalle[0];
     this.mvt = directionDeBalle[1]
@@ -212,9 +297,10 @@ var FabriqueDeBalle = function(){
                 rect1.x + rect1.width > rect2.x &&
                 rect1.y < rect2.y + rect2.height &&
                 rect1.height + rect1.y > rect2.y) {
-                    alert('collisions');
+                    score += 150;
                     that.clean();
                     elt.clean();
+                    
                     
                 }
 
@@ -233,18 +319,12 @@ var FabriqueDeBalle = function(){
     fenetreDeJeu.appendChild(this.balle);
     requestAnimationFrame(this.tir);
     this.cleanBalle = setInterval(this.removeBalle,1000);
-    this.checkCollision = setInterval(this.collisions,200);
+    this.checkCollision = setInterval(this.collisions,50);
 
     return this;
  }  
 
-//Changement de fenetre
-// position: absolute;
-// left: -1200px;
-// z-index: -1;
 
-
- //Collisions 
 
 
 
@@ -252,16 +332,7 @@ var FabriqueDeBalle = function(){
 //Mouvement du personnage
 
     
-    container.style.position="absolute";
-    container.style.height="160px";
-    container.style.width="73px";
-    container.style.overflow="hidden";
-    container.style.left= "560px";
-    container.style.top="450px";  
-    
-   
-    imageDetective.style.position="absolute";
-    imageDetective.style.width="333px";
+
     
 
     var imagePositionX = parseInt(container.style.left);
@@ -277,8 +348,8 @@ var FabriqueDeBalle = function(){
         switch(code){
             case 37 : 
             // arrow left
-            if(parseInt(imagePositionX) <= 200){
-                imagePositionX = 180;
+            if(parseInt(imagePositionX) <= 110){
+                imagePositionX = 120;
             }
             
             directionDeBalle = ["left",1];
@@ -321,30 +392,7 @@ var FabriqueDeBalle = function(){
             if(parseInt(imagePositionX)>=1010){
                     imagePositionX = 1000;
             }
-            if(parseInt(imagePositionX) >= 960 && parseInt(imagePositionY)>=440){
-                imagePositionX = 950;
-                imagePositionY = 440;
-            }
-            if(parseInt(imagePositionX) >= 980 && parseInt(imagePositionY)>=420){
-                imagePositionX = 970;
-                imagePositionY = 420;
-            }
-            if(parseInt(imagePositionX) >= 1010 && parseInt(imagePositionY)>=400){
-                imagePositionX = 1000;
-                imagePositionY = 400;
-            }
-            if(parseInt(imagePositionX) >= 1010 && parseInt(imagePositionY)>=60){
-                imagePositionX = 1010;
-                imagePositionY = 50;
-            }
-            // if(parseInt(imagePositionX) >= 960 && parseInt(imagePositionY)>=10){
-            //     imagePositionX = 950;
-            //     imagePositionY = 10;
-            // }
-            // if(parseInt(imagePositionX) >= 950 && parseInt(imagePositionY)>=0){
-            //     imagePositionX = 940;
-            //     imagePositionY = 0;
-            // }
+           
 
             directionDeBalle = ["left",-1];
             
@@ -365,14 +413,7 @@ var FabriqueDeBalle = function(){
             if(parseInt(imagePositionY)>=460){
                 imagePositionY=450;
             }
-            if(parseInt(imagePositionX) >= 1010 && parseInt(imagePositionY)>=400){
-                imagePositionX = 1010;
-                imagePositionY = 390;
-            }
-            if(parseInt(imagePositionX) >= 980 && parseInt(imagePositionY)>=430){
-                imagePositionX = 980;
-                imagePositionY = 420;
-            }
+           
             
             directionDeBalle = ["top",-1];
 
@@ -391,6 +432,12 @@ var FabriqueDeBalle = function(){
             case 32: 
             new FabriqueDeBalle();
             // console.log(tableauBalle);
+            if(balle.tirseconde){
+                setTimeout(function(){
+                    balle.tirseconde = true;
+                },1000);
+                balle.tirseconde = false;
+            }
 
 
             break;
