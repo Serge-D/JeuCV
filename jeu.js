@@ -13,8 +13,10 @@ var imageDetective = window.document.getElementById('img1');
 var fenetreDeFond = window.document.getElementById('fenetredefond');
 var monscore = window.document.getElementById("monscore");
 var pointdevie = window.document.getElementById("pv");
-console.log(pointdevie); //demander pourquoi la console me l'affiche mais apres la definie en undefined
+var commandes = window.document.getElementById("commandes");
+var liencommandes = window.document.getElementById("liencommandes");
 var score = 0;
+// console.log(pointdevie); //demander pourquoi la console me l'affiche mais apres la definie en undefined
 
 
 //tableau balle et tableau fantome
@@ -34,6 +36,16 @@ container.style.top="240px";
 
 imageDetective.style.position="absolute";
 imageDetective.style.width="333px";
+
+//Affichage des commandes
+commandes.style.display="none";
+liencommandes.addEventListener("click",function(){
+    if(commandes.style.display=="none"){
+    commandes.style.display="block";
+    }else {
+        commandes.style.display="none";
+    }
+})
 
 
 // Score 
@@ -173,6 +185,7 @@ restart.addEventListener("click",function(){
                     // for(let i=0; i<tl;i++){
                     //     tableauimage[i].style.display = "none";
                     // }
+                    //essayer avec lastchild
                     
                     // console.log(pointdevie.children)
             }
