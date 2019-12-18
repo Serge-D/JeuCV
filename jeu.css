@@ -119,24 +119,18 @@ section{
     left: 0;
     top: 270px;
     border: 2px solid white;
-    border-radius: 20px;
+    border-radius: 20px;    
     color: white;
     opacity: 0.7;
     text-align: center;
 }
 
 #statut{
-    height: 755px;
-    margin-top: 90px;
-    /* background-color: white; */
-    width: 350px;
-    margin-right: 50px;
+    margin-top: 0px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-direction: row;
+    /* justify-content: space-around; */
     text-align: center;
-    /* opacity: 0.4; */
-    border-radius: 10px;
     
 }
 
