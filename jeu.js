@@ -23,6 +23,21 @@ var score = 0;
 var tableauBalle = [];
 var tableauFantome = [];
 
+// Gestion de la page d'accueil lorsqu'on appuie sur le bouton start
+
+fenetreDeJeu.style.display = 'none';
+fenetreStatut.style.display = 'none';
+
+boutonStart.addEventListener("click",function(){
+    if(fenetreDeJeu.style.display == 'none'){
+        boutonStart.style.display = 'none';
+        fenetreDeJeu.style.display = "";
+        fenetreStatut.style.display = "";
+        fenetreRegles.style.display = "none";
+    }
+})
+
+
 
 //Sprite et Div Container 
 
@@ -109,19 +124,6 @@ function getRandomIntInterval(min, max) {
 }
 
 
-// Gestion de la page d'accueil lorsqu'on appuie sur le bouton start
-
-fenetreDeJeu.style.display = 'none';
-fenetreStatut.style.display = 'none';
-
-boutonStart.addEventListener("click",function(){
-    if(fenetreDeJeu.style.display == 'none'){
-        boutonStart.style.display = 'none';
-        fenetreDeJeu.style.display = "";
-        fenetreStatut.style.display = "";
-        fenetreRegles.style.display = "none";
-    }
-})
 
 
 //ReStart
