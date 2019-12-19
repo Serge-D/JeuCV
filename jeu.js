@@ -32,14 +32,17 @@ detectivemort.style.display = "none";
 commandes.style.display="none";
 
 // Déclaration des variables tableau fantome et tableau balle
+
 var tableauBalle = [];
 var tableauFantome = [];
+
+//Direction de Balle
+
+var directionDeBalle = null;
 
 
 // Fonction pour l'affichage de la div commandes
 window.addEventListener("load", function(){
-    
-   
     
    
     liencommandes.addEventListener("click",function(){
@@ -112,6 +115,7 @@ var calculscore = setInterval(function(){
     if(score >= 5000){
         document.getElementById("logo8").style.display = "inline";
     };
+    //gestion lors de la victoire
     if(score == 5000){
         clearInterval(calculscore);
         fondDuJeu.style.display = "none";
@@ -132,12 +136,8 @@ var calculscore = setInterval(function(){
 
 
 
-
-//Direction de Balle
-
-var directionDeBalle = null;
-
 //fonctions pour generer des chiffres aléatoires pour ma Fabrique de fantomes
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 };
@@ -178,11 +178,9 @@ restart.addEventListener("click",function(){
             return o.id === that.id;
        })
        if (index !== -1) tableauFantome.splice(index, 1);
-        // this.fantome.parentNode.removeChild(this.fantome);
         this.fantome.remove()
         
     }.bind(this)
-    // this.directions = [-1, 1][getRandomInt(2)]
     this.direction = getRandomIntInterval(1, 5);
     this.limit = 1100;
     this.limit2 = 650;
@@ -257,7 +255,7 @@ restart.addEventListener("click",function(){
     return this;
 }
 
-//Fonction pour la gestion de la vie
+//Fonction pour la gestion de la vie et la gestion lors de la perte de la partie
 
 var pertedevie = function(){
 var tableauimage = pointdevie.children;
@@ -450,8 +448,7 @@ var FabriqueDeBalle = function(){
 
             imagePositionX -= 10;
             container.style.left = imagePositionX + "px";
-            // console.log(imagePositionX);
-             imagedivx -= 88;
+            imagedivx -= 88;
             imageDetective.style.left=imagedivx+"px";
             imagedivy = -538;
             imageDetective.style.top = imagedivy+"px";
@@ -471,7 +468,6 @@ var FabriqueDeBalle = function(){
 
             imagePositionY -= 10;
             container.style.top= imagePositionY + "px";
-            // console.log(imagePositionX);
             imagedivx -= 88;
             imageDetective.style.left=imagedivx+"px";
             imagedivy = -176;
@@ -492,7 +488,6 @@ var FabriqueDeBalle = function(){
             
             imagePositionX += 10;
             container.style.left= imagePositionX +"px";
-            // console.log(imagePositionY);
             imagedivx -= 88;
             imageDetective.style.left=imagedivx+"px";
             imagedivy = -358;
@@ -513,7 +508,6 @@ var FabriqueDeBalle = function(){
 
             imagePositionY +=10;
             container.style.top= imagePositionY +"px";
-            // console.log(imagePositionY);
             imagedivx -= 88;
             imageDetective.style.left=imagedivx+"px";
             imagedivy = 0;
@@ -525,7 +519,7 @@ var FabriqueDeBalle = function(){
 
             case 32: 
             if(gameover.style.display == "none"){
-
+                //application de la fonction tir
                 tir()
             }
            
