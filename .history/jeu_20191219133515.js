@@ -41,13 +41,6 @@ var tableauFantome = [];
 var directionDeBalle = null;
 
 
-// Déclaration de la fonction pour le Restart
-
-restart.addEventListener("click",function(){
-    document.location.reload();
-})
-
-
 // Fonction pour l'affichage de la div commandes
 window.addEventListener("load", function(){
     
@@ -91,7 +84,55 @@ imageDetective.style.width="333px";
 
 
 
+// Gestion du score
 
+monscore.style.color = "white";
+monscore.style.fontSize = "1.5em";
+monscore.style.fontFamily = "'Comic Sans MS',serif";
+
+var calculscore = setInterval(function(){
+    if(score >= 600){
+        document.getElementById("logo1").style.display = "inline";
+    };
+    if(score >= 1200){
+        document.getElementById("logo2").style.display = "inline";
+    };
+    if(score >= 1800){
+        document.getElementById("logo3").style.display = "inline";
+    };
+    if(score >= 2400){
+        document.getElementById("logo4").style.display = "inline";
+    };
+    if(score >= 3000){
+        document.getElementById("logo5").style.display = "inline";
+    };
+    if(score >= 3600){
+        document.getElementById("logo6").style.display = "inline";
+    };
+    if(score >= 4200){
+        document.getElementById("logo7").style.display = "inline";
+    }; 
+    if(score >= 5000){
+        document.getElementById("logo8").style.display = "inline";
+    };
+    //gestion lors de la victoire
+    if(score == 5000){
+        clearInterval(calculscore);
+        fondDuJeu.style.display = "none";
+        fenetreStatut.style.display = "none";
+        youwin.style.display = "block";
+        container.remove();
+        
+
+        setTimeout(function(){
+            open("CV.pdf");
+        },1000)
+    }
+    
+    monscore.textContent = score;
+    
+    
+},200);
 
 
 
@@ -111,7 +152,11 @@ function getRandomIntInterval(min, max) {
 
 
 
+// Déclaration de la fonction pour le Restart
 
+restart.addEventListener("click",function(){
+    document.location.reload();
+})
 
 
 
@@ -227,9 +272,39 @@ return this;
         }
     }, 2000);
 }
+//Fonction pour la gestion de la vie et la gestion lors de la perte de la partie
 
+var pertedevie = function(){
+var tableauimage = pointdevie.children;
+if(tableauimage.length > 0){
+    if(pertevie){
+        pertevie = false
+        pointdevie.removeChild(tableauimage[0]);
+        setTimeout(function(){
+            pertevie = true
+            clearTimeout(this)
+        }, 1000)
+    }
+}else{
+        clearInterval(calculscore);
+        clearInterval(interval);
+        fondDuJeu.style.display = "none";
+        gameover.style.display = "block";
+        fenetreStatut.style.display = "none";
+        detectivemort.style.display = "block";
+        
+        container.remove();
+        while(tableauFantome.length>0){
+        tableauFantome.forEach(function(elmt){
+            elmt.clean()
+        })
+        
+        
 
-
+    }
+}
+    
+}
 
 // fonction pour la gestion des tirs de balle
 
@@ -349,91 +424,6 @@ var FabriqueDeBalle = function(){
     return this;
  }  
 
-
- // Gestion du score
-
-monscore.style.color = "white";
-monscore.style.fontSize = "1.5em";
-monscore.style.fontFamily = "'Comic Sans MS',serif";
-
-var calculscore = setInterval(function(){
-    if(score >= 600){
-        document.getElementById("logo1").style.display = "inline";
-    };
-    if(score >= 1200){
-        document.getElementById("logo2").style.display = "inline";
-    };
-    if(score >= 1800){
-        document.getElementById("logo3").style.display = "inline";
-    };
-    if(score >= 2400){
-        document.getElementById("logo4").style.display = "inline";
-    };
-    if(score >= 3000){
-        document.getElementById("logo5").style.display = "inline";
-    };
-    if(score >= 3600){
-        document.getElementById("logo6").style.display = "inline";
-    };
-    if(score >= 4200){
-        document.getElementById("logo7").style.display = "inline";
-    }; 
-    if(score >= 5000){
-        document.getElementById("logo8").style.display = "inline";
-    };
-    //gestion lors de la victoire
-    if(score == 5000){
-        clearInterval(calculscore);
-        fondDuJeu.style.display = "none";
-        fenetreStatut.style.display = "none";
-        youwin.style.display = "block";
-        container.remove();
-        
-
-        setTimeout(function(){
-            document.location.reload();
-            open("CV.pdf");
-        },1000)
-    }
-    
-    monscore.textContent = score;
-    
-    
-},200);
-
-//Fonction pour la gestion de la vie et la gestion lors de la perte de la partie
-
-var pertedevie = function(){
-    var tableauimage = pointdevie.children;
-    if(tableauimage.length > 0){
-        if(pertevie){
-            pertevie = false
-            pointdevie.removeChild(tableauimage[0]);
-            setTimeout(function(){
-                pertevie = true
-                clearTimeout(this)
-            }, 1000)
-        }
-    }else{
-            clearInterval(calculscore);
-            clearInterval(interval);
-            fondDuJeu.style.display = "none";
-            gameover.style.display = "block";
-            fenetreStatut.style.display = "none";
-            detectivemort.style.display = "block";
-            
-            container.remove();
-            while(tableauFantome.length>0){
-            tableauFantome.forEach(function(elmt){
-                elmt.clean()
-            })
-            
-            
-    
-        }
-    }
-        
-}
 
 
 // Gestion des mouvements du personnage

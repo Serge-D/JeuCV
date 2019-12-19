@@ -39,8 +39,6 @@ var tableauFantome = [];
 //Direction de Balle
 
 var directionDeBalle = null;
-
-
 // Déclaration de la fonction pour le Restart
 
 restart.addEventListener("click",function(){
@@ -391,7 +389,6 @@ var calculscore = setInterval(function(){
         
 
         setTimeout(function(){
-            document.location.reload();
             open("CV.pdf");
         },1000)
     }

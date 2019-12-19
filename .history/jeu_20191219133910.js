@@ -391,7 +391,6 @@ var calculscore = setInterval(function(){
         
 
         setTimeout(function(){
-            document.location.reload();
             open("CV.pdf");
         },1000)
     }

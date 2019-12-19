@@ -41,13 +41,6 @@ var tableauFantome = [];
 var directionDeBalle = null;
 
 
-// Déclaration de la fonction pour le Restart
-
-restart.addEventListener("click",function(){
-    document.location.reload();
-})
-
-
 // Fonction pour l'affichage de la div commandes
 window.addEventListener("load", function(){
     
@@ -111,7 +104,11 @@ function getRandomIntInterval(min, max) {
 
 
 
+// Déclaration de la fonction pour le Restart
 
+restart.addEventListener("click",function(){
+    document.location.reload();
+})
 
 
 
@@ -391,7 +388,6 @@ var calculscore = setInterval(function(){
         
 
         setTimeout(function(){
-            document.location.reload();
             open("CV.pdf");
         },1000)
     }

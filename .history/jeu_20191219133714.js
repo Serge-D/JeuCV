@@ -41,13 +41,6 @@ var tableauFantome = [];
 var directionDeBalle = null;
 
 
-// Déclaration de la fonction pour le Restart
-
-restart.addEventListener("click",function(){
-    document.location.reload();
-})
-
-
 // Fonction pour l'affichage de la div commandes
 window.addEventListener("load", function(){
     
@@ -111,7 +104,11 @@ function getRandomIntInterval(min, max) {
 
 
 
+// Déclaration de la fonction pour le Restart
 
+restart.addEventListener("click",function(){
+    document.location.reload();
+})
 
 
 
@@ -229,7 +226,39 @@ return this;
 }
 
 
+//Fonction pour la gestion de la vie et la gestion lors de la perte de la partie
 
+var pertedevie = function(){
+    var tableauimage = pointdevie.children;
+    if(tableauimage.length > 0){
+        if(pertevie){
+            pertevie = false
+            pointdevie.removeChild(tableauimage[0]);
+            setTimeout(function(){
+                pertevie = true
+                clearTimeout(this)
+            }, 1000)
+        }
+    }else{
+            clearInterval(calculscore);
+            clearInterval(interval);
+            fondDuJeu.style.display = "none";
+            gameover.style.display = "block";
+            fenetreStatut.style.display = "none";
+            detectivemort.style.display = "block";
+            
+            container.remove();
+            while(tableauFantome.length>0){
+            tableauFantome.forEach(function(elmt){
+                elmt.clean()
+            })
+            
+            
+    
+        }
+    }
+        
+}
 
 // fonction pour la gestion des tirs de balle
 
@@ -391,7 +420,6 @@ var calculscore = setInterval(function(){
         
 
         setTimeout(function(){
-            document.location.reload();
             open("CV.pdf");
         },1000)
     }
@@ -400,40 +428,6 @@ var calculscore = setInterval(function(){
     
     
 },200);
-
-//Fonction pour la gestion de la vie et la gestion lors de la perte de la partie
-
-var pertedevie = function(){
-    var tableauimage = pointdevie.children;
-    if(tableauimage.length > 0){
-        if(pertevie){
-            pertevie = false
-            pointdevie.removeChild(tableauimage[0]);
-            setTimeout(function(){
-                pertevie = true
-                clearTimeout(this)
-            }, 1000)
-        }
-    }else{
-            clearInterval(calculscore);
-            clearInterval(interval);
-            fondDuJeu.style.display = "none";
-            gameover.style.display = "block";
-            fenetreStatut.style.display = "none";
-            detectivemort.style.display = "block";
-            
-            container.remove();
-            while(tableauFantome.length>0){
-            tableauFantome.forEach(function(elmt){
-                elmt.clean()
-            })
-            
-            
-    
-        }
-    }
-        
-}
 
 
 // Gestion des mouvements du personnage

@@ -32,24 +32,14 @@ detectivemort.style.display = "none";
 commandes.style.display="none";
 
 // Déclaration des variables tableau fantome et tableau balle
-
 var tableauBalle = [];
 var tableauFantome = [];
-
-//Direction de Balle
-
-var directionDeBalle = null;
-
-
-// Déclaration de la fonction pour le Restart
-
-restart.addEventListener("click",function(){
-    document.location.reload();
-})
 
 
 // Fonction pour l'affichage de la div commandes
 window.addEventListener("load", function(){
+    
+   
     
    
     liencommandes.addEventListener("click",function(){
@@ -91,13 +81,63 @@ imageDetective.style.width="333px";
 
 
 
+// Gestion du score
+
+monscore.style.color = "white";
+monscore.style.fontSize = "1.5em";
+monscore.style.fontFamily = "'Comic Sans MS',serif";
+
+var calculscore = setInterval(function(){
+    if(score >= 600){
+        document.getElementById("logo1").style.display = "inline";
+    };
+    if(score >= 1200){
+        document.getElementById("logo2").style.display = "inline";
+    };
+    if(score >= 1800){
+        document.getElementById("logo3").style.display = "inline";
+    };
+    if(score >= 2400){
+        document.getElementById("logo4").style.display = "inline";
+    };
+    if(score >= 3000){
+        document.getElementById("logo5").style.display = "inline";
+    };
+    if(score >= 3600){
+        document.getElementById("logo6").style.display = "inline";
+    };
+    if(score >= 4200){
+        document.getElementById("logo7").style.display = "inline";
+    }; 
+    if(score >= 5000){
+        document.getElementById("logo8").style.display = "inline";
+    };
+    if(score == 5000){
+        clearInterval(calculscore);
+        fondDuJeu.style.display = "none";
+        fenetreStatut.style.display = "none";
+        youwin.style.display = "block";
+        container.remove();
+
+        setTimeout(function(){
+            open("CV.pdf");
+        },1500)
+    }
+    
+    monscore.textContent = score;
+    
+    
+},200);
 
 
 
 
+
+//Direction de Balle
+
+var directionDeBalle = null;
 
 //fonctions pour generer des chiffres aléatoires pour ma Fabrique de fantomes
-
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 };
@@ -111,7 +151,11 @@ function getRandomIntInterval(min, max) {
 
 
 
+// Déclaration de la fonction pour le Restart
 
+restart.addEventListener("click",function(){
+    document.location.reload();
+})
 
 
 
@@ -134,9 +178,11 @@ function getRandomIntInterval(min, max) {
             return o.id === that.id;
        })
        if (index !== -1) tableauFantome.splice(index, 1);
+        // this.fantome.parentNode.removeChild(this.fantome);
         this.fantome.remove()
         
     }.bind(this)
+    // this.directions = [-1, 1][getRandomInt(2)]
     this.direction = getRandomIntInterval(1, 5);
     this.limit = 1100;
     this.limit2 = 650;
@@ -203,33 +249,47 @@ function getRandomIntInterval(min, max) {
     
     
     requestAnimationFrame(this.animation);
-}.bind(this)
+    }.bind(this)
 
-fenetreDeJeu.appendChild(this.fantome);
-requestAnimationFrame(this.animation);
-this.checkCollision = setInterval(this.collisionsPersonnage,50);
-return this;
+    fenetreDeJeu.appendChild(this.fantome);
+    requestAnimationFrame(this.animation);
+    this.checkCollision = setInterval(this.collisionsPersonnage,50);
+    return this;
 }
 
+//Fonction pour la gestion de la vie
 
+var pertedevie = function(){
+var tableauimage = pointdevie.children;
+if(tableauimage.length > 0){
+    if(pertevie){
+        pertevie = false
+        pointdevie.removeChild(tableauimage[0]);
+        setTimeout(function(){
+            pertevie = true
+            clearTimeout(this)
+        }, 1000)
+    }
+}else{
+        clearInterval(calculscore);
+        clearInterval(interval);
+        fondDuJeu.style.display = "none";
+        gameover.style.display = "block";
+        fenetreStatut.style.display = "none";
+        detectivemort.style.display = "block";
+        
+        container.remove();
+        while(tableauFantome.length>0){
+        tableauFantome.forEach(function(elmt){
+            elmt.clean()
+        })
+        
+        
 
-// fonction pour l'apparition de fantomes
-
- var creationFantome= function(){ 
-    let i = 0
-    interval = setInterval(function(){
-    if(i<=24){
-            tableauFantome.push(new FabriqueDeFantome(i));
-            console.log(tableauFantome)
-            i++ 
-        } else {
-            clearInterval(interval)
-        }
-    }, 2000);
+    }
 }
-
-
-
+    
+}
 
 // fonction pour la gestion des tirs de balle
 
@@ -245,9 +305,23 @@ var tir = function(){
 }
  
 
+// fonction pour l'apparition de fantomes
+
+ var creationFantome= function(){ 
+    let i = 0
+    interval = setInterval(function(){
+    if(i<=24){
+            tableauFantome.push(new FabriqueDeFantome(i));
+            console.log(tableauFantome)
+            i++ 
+        } else {
+            clearInterval(interval)
+        }
+    }, 2000);
+}
 creationFantome();
 
-// Fonction constructeur des balles qui attrapent les fantomes qui comprend : le déplacement des balles, le clean des balles, la collision avec les fantomes,
+// Fonction constructeur des balles qui attrapent les fantomes qui comprend : le déplacement des balles, 
 var FabriqueDeBalle = function(){
      
     this.balle = new Image();
@@ -350,95 +424,15 @@ var FabriqueDeBalle = function(){
  }  
 
 
- // Gestion du score
 
-monscore.style.color = "white";
-monscore.style.fontSize = "1.5em";
-monscore.style.fontFamily = "'Comic Sans MS',serif";
 
-var calculscore = setInterval(function(){
-    if(score >= 600){
-        document.getElementById("logo1").style.display = "inline";
-    };
-    if(score >= 1200){
-        document.getElementById("logo2").style.display = "inline";
-    };
-    if(score >= 1800){
-        document.getElementById("logo3").style.display = "inline";
-    };
-    if(score >= 2400){
-        document.getElementById("logo4").style.display = "inline";
-    };
-    if(score >= 3000){
-        document.getElementById("logo5").style.display = "inline";
-    };
-    if(score >= 3600){
-        document.getElementById("logo6").style.display = "inline";
-    };
-    if(score >= 4200){
-        document.getElementById("logo7").style.display = "inline";
-    }; 
-    if(score >= 5000){
-        document.getElementById("logo8").style.display = "inline";
-    };
-    //gestion lors de la victoire
-    if(score == 5000){
-        clearInterval(calculscore);
-        fondDuJeu.style.display = "none";
-        fenetreStatut.style.display = "none";
-        youwin.style.display = "block";
-        container.remove();
-        
 
-        setTimeout(function(){
-            document.location.reload();
-            open("CV.pdf");
-        },1000)
-    }
+
+//Mouvement du personnage
+
     
-    monscore.textContent = score;
+
     
-    
-},200);
-
-//Fonction pour la gestion de la vie et la gestion lors de la perte de la partie
-
-var pertedevie = function(){
-    var tableauimage = pointdevie.children;
-    if(tableauimage.length > 0){
-        if(pertevie){
-            pertevie = false
-            pointdevie.removeChild(tableauimage[0]);
-            setTimeout(function(){
-                pertevie = true
-                clearTimeout(this)
-            }, 1000)
-        }
-    }else{
-            clearInterval(calculscore);
-            clearInterval(interval);
-            fondDuJeu.style.display = "none";
-            gameover.style.display = "block";
-            fenetreStatut.style.display = "none";
-            detectivemort.style.display = "block";
-            
-            container.remove();
-            while(tableauFantome.length>0){
-            tableauFantome.forEach(function(elmt){
-                elmt.clean()
-            })
-            
-            
-    
-        }
-    }
-        
-}
-
-
-// Gestion des mouvements du personnage
-
-
 
     var imagePositionX = parseInt(container.style.left);
     var imagePositionY= parseInt(container.style.top);
@@ -461,7 +455,8 @@ var pertedevie = function(){
 
             imagePositionX -= 10;
             container.style.left = imagePositionX + "px";
-            imagedivx -= 88;
+            // console.log(imagePositionX);
+             imagedivx -= 88;
             imageDetective.style.left=imagedivx+"px";
             imagedivy = -538;
             imageDetective.style.top = imagedivy+"px";
@@ -481,6 +476,7 @@ var pertedevie = function(){
 
             imagePositionY -= 10;
             container.style.top= imagePositionY + "px";
+            // console.log(imagePositionX);
             imagedivx -= 88;
             imageDetective.style.left=imagedivx+"px";
             imagedivy = -176;
@@ -501,6 +497,7 @@ var pertedevie = function(){
             
             imagePositionX += 10;
             container.style.left= imagePositionX +"px";
+            // console.log(imagePositionY);
             imagedivx -= 88;
             imageDetective.style.left=imagedivx+"px";
             imagedivy = -358;
@@ -521,6 +518,7 @@ var pertedevie = function(){
 
             imagePositionY +=10;
             container.style.top= imagePositionY +"px";
+            // console.log(imagePositionY);
             imagedivx -= 88;
             imageDetective.style.left=imagedivx+"px";
             imagedivy = 0;
@@ -532,7 +530,7 @@ var pertedevie = function(){
 
             case 32: 
             if(gameover.style.display == "none"){
-                //application de la fonction tir
+
                 tir()
             }
            
