@@ -8,7 +8,7 @@ body{
     
 }
 
-/*Header */
+/*Gestion du CSS pour toutes les différentes div du Header */
 
 ul {
     display: flex;
@@ -75,7 +75,7 @@ h1 {
         margin-left: -5%;
     }
 }
-/*Section*/
+/*Gestion du CSS pour toutes les différentes div de la section*/
 
 section{
     display: flex;
