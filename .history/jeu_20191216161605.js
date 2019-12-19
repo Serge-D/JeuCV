@@ -1,5 +1,6 @@
 'use strict'
 
+window.addEventListener("load", function(){
 // Mes Id stockées dans des variables
 
 var boutonStart =  window.document.getElementById('boutonstart');
@@ -10,59 +11,13 @@ var restart = window.document.getElementById('restart');
 var container = window.document.getElementById('container');
 var imageDetective = window.document.getElementById('img1');
 var fenetreDeFond = window.document.getElementById('fenetredefond');
-var fondDuJeu = window.document.getElementById("fond");
-var gameover = window.document.getElementById("gameover");
-var youwin = window.document.getElementById("youwin");
-var detectivemort = window.document.getElementById("detectivemort");
 var monscore = window.document.getElementById("monscore");
-var pointdevie = window.document.getElementById("pv");
-var commandes = window.document.getElementById("commandes");
-var liencommandes = window.document.getElementById("liencommandes");
 var score = 0;
-var pertevie = true
-var tirseconde = true
-var interval = null
 
-
-fenetreDeJeu.style.display = 'none';
-fenetreStatut.style.display = 'none';
-gameover.style.display ="none";
-youwin.style.display = "none";
-detectivemort.style.display = "none";
-commandes.style.display="none";
 
 //tableau balle et tableau fantome
 var tableauBalle = [];
 var tableauFantome = [];
-
-window.addEventListener("load", function(){
-    
-    
-    //Affichage des commandes
-    
-   
-    liencommandes.addEventListener("click",function(){
-        if(commandes.style.display=="none"){
-        commandes.style.display="block";
-        }else {
-            commandes.style.display="none";
-        }
-    })
-});
-
-
-// Gestion de la page d'accueil lorsqu'on appuie sur le bouton start
-
-
-boutonStart.addEventListener("click",function(){
-    if(fenetreDeJeu.style.display == 'none'){
-        boutonStart.style.display = 'none';
-        fenetreDeJeu.style.display = "";
-        fenetreStatut.style.display = "";
-        fenetreRegles.style.display = "none";
-    }
-
-
 
 
 //Sprite et Div Container 
@@ -79,54 +34,42 @@ imageDetective.style.position="absolute";
 imageDetective.style.width="333px";
 
 
-
 // Score 
 monscore.style.color = "white";
 monscore.style.fontSize = "1.5em";
-monscore.style.fontFamily = "'Comic Sans MS',serif";
 
 var calculscore = setInterval(function(){
-    if(score >= 600){
+    if(score >= 400){
         document.getElementById("logo1").style.display = "inline";
     };
-    if(score >= 1200){
+    if(score >= 800){
         document.getElementById("logo2").style.display = "inline";
     };
-    if(score >= 1800){
+    if(score >= 1200){
         document.getElementById("logo3").style.display = "inline";
     };
-    if(score >= 2400){
+    if(score >= 1600){
         document.getElementById("logo4").style.display = "inline";
     };
-    if(score >= 3000){
+    if(score >= 2000){
         document.getElementById("logo5").style.display = "inline";
     };
-    if(score >= 3600){
+    if(score >= 2400){
         document.getElementById("logo6").style.display = "inline";
     };
-    if(score >= 4200){
+    if(score >= 2800){
         document.getElementById("logo7").style.display = "inline";
     }; 
-    if(score >= 5000){
+    if(score >= 3200){
         document.getElementById("logo8").style.display = "inline";
     };
-    if(score == 5000){
-        clearInterval(calculscore);
-        fondDuJeu.style.display = "none";
-        fenetreStatut.style.display = "none";
-        youwin.style.display = "block";
-        container.remove();
-
-        setTimeout(function(){
-            open("CV.pdf");
-        },1500)
-    }
-    
+    score += 10
     monscore.textContent = score;
     
     
-},200);
+},1000);
 
+console.log(monscore);
 
 
 
@@ -147,6 +90,19 @@ function getRandomIntInterval(min, max) {
 }
 
 
+// Gestion de la page d'accueil lorsqu'on appuie sur le bouton start
+
+fenetreDeJeu.style.display = 'none';
+fenetreStatut.style.display = 'none';
+
+boutonStart.addEventListener("click",function(){
+    if(fenetreDeJeu.style.display == 'none'){
+        boutonStart.style.display = 'none';
+        fenetreDeJeu.style.display = "";
+        fenetreStatut.style.display = "";
+        fenetreRegles.style.display = "none";
+    }
+})
 
 
 //ReStart
@@ -170,13 +126,11 @@ restart.addEventListener("click",function(){
     this.id = "fantome_" + fantomeId
     this.clean = function(){
         var that = this;
+        this.fantome.parentNode.removeChild(this.fantome);
         var index = tableauFantome.findIndex(function(o){
             return o.id === that.id;
        })
        if (index !== -1) tableauFantome.splice(index, 1);
-        // this.fantome.parentNode.removeChild(this.fantome);
-        this.fantome.remove()
-        
     }.bind(this)
     // this.directions = [-1, 1][getRandomInt(2)]
     this.direction = getRandomIntInterval(1, 5);
@@ -189,8 +143,8 @@ restart.addEventListener("click",function(){
         let perso1 = {
             x : parseInt(container.style.left),
             y : parseInt(container.style.top),
-            width : 53,
-            height : 140
+            width : 73,
+            height : 160
         };
         // console.log(perso1.x);
         // console.log(perso1.y);
@@ -206,11 +160,8 @@ restart.addEventListener("click",function(){
                 perso1.x + perso1.width > perso2.x &&
                 perso1.y < perso2.y + perso2.height &&
                 perso1.height + perso1.y > perso2.y){
-
-                    pertedevie();
-                   
-            }
-                    
+                    console.log('yo');
+                }
     })}.bind(this)
 
     this.animation = function(){
@@ -253,64 +204,21 @@ restart.addEventListener("click",function(){
     return this;
 }
 
-//Fonction perte de vie
-var pertedevie = function(){
-var tableauimage = pointdevie.children;
-if(tableauimage.length > 0){
-    if(pertevie){
-        pertevie = false
-        pointdevie.removeChild(tableauimage[0]);
-        setTimeout(function(){
-            pertevie = true
-            clearTimeout(this)
-        }, 1000)
-    }
-}else{
-        clearInterval(calculscore);
-        clearInterval(interval);
-        fondDuJeu.style.display = "none";
-        gameover.style.display = "block";
-        fenetreStatut.style.display = "none";
-        detectivemort.style.display = "block";
-        
-        container.remove();
-        while(tableauFantome.length>0){
-        tableauFantome.forEach(function(elmt){
-            elmt.clean()
-        })
-        
-        
 
-    }
-}
-    
-}
-
-// fonction tir 
-var tir = function(){
-    if(tirseconde){
-        let balle = new FabriqueDeBalle();
-        tirseconde = false
-        setTimeout(function(){
-            tirseconde = true;
-            clearTimeout(this)
-        },500);
-    }
-}
  
 
 //  Apparition de fantomes
  var creationFantome= function(){ 
-    let i = 0
-    interval = setInterval(function(){
-    if(i<=24){
+    let i = 1
+    let interval = setInterval(function(){
+    if(i<=20){
             tableauFantome.push(new FabriqueDeFantome(i));
             console.log(tableauFantome)
             i++ 
         } else {
             clearInterval(interval)
         }
-    }, 2000);
+    }, 5000);
 }
 creationFantome();
 
@@ -325,7 +233,7 @@ var FabriqueDeBalle = function(){
     this.balle.style.top = (parseInt(container.style.top) + parseInt(container.style.height) /2) +"px";
     this.balle.src = 'attrapeFantome.png';
     this.balle.style.display="block";
-    
+    this.tirseconde = true;
     
     this.directionDeBalle = directionDeBalle[0];
     this.mvt = directionDeBalle[1]
@@ -389,7 +297,7 @@ var FabriqueDeBalle = function(){
                 rect1.x + rect1.width > rect2.x &&
                 rect1.y < rect2.y + rect2.height &&
                 rect1.height + rect1.y > rect2.y) {
-                    score += 200;
+                    score += 150;
                     that.clean();
                     elt.clean();
                     
@@ -522,11 +430,15 @@ var FabriqueDeBalle = function(){
             break;
 
             case 32: 
-            if(gameover.style.display == "none"){
-
-                tir()
+            new FabriqueDeBalle();
+            // console.log(tableauBalle);
+            if(this.balle.tirseconde){
+                setTimeout(function(){
+                    this.balle.tirseconde = true;
+                },1000);
+                thisballe.tirseconde = false;
             }
-           
+
 
             break;
 

@@ -12,7 +12,6 @@ var imageDetective = window.document.getElementById('img1');
 var fenetreDeFond = window.document.getElementById('fenetredefond');
 var fondDuJeu = window.document.getElementById("fond");
 var gameover = window.document.getElementById("gameover");
-var youwin = window.document.getElementById("youwin");
 var detectivemort = window.document.getElementById("detectivemort");
 var monscore = window.document.getElementById("monscore");
 var pointdevie = window.document.getElementById("pv");
@@ -23,11 +22,9 @@ var pertevie = true
 var tirseconde = true
 var interval = null
 
-
 fenetreDeJeu.style.display = 'none';
 fenetreStatut.style.display = 'none';
 gameover.style.display ="none";
-youwin.style.display = "none";
 detectivemort.style.display = "none";
 commandes.style.display="none";
 
@@ -107,25 +104,18 @@ var calculscore = setInterval(function(){
     if(score >= 4200){
         document.getElementById("logo7").style.display = "inline";
     }; 
-    if(score >= 5000){
+    if(score >= 4000){
         document.getElementById("logo8").style.display = "inline";
     };
-    if(score == 5000){
+    if(score >= 5500){
         clearInterval(calculscore);
-        fondDuJeu.style.display = "none";
-        fenetreStatut.style.display = "none";
-        youwin.style.display = "block";
-        container.remove();
-
-        setTimeout(function(){
-            open("CV.pdf");
-        },1500)
+        
     }
     
     monscore.textContent = score;
     
     
-},200);
+},1000);
 
 
 
@@ -303,7 +293,7 @@ var tir = function(){
  var creationFantome= function(){ 
     let i = 0
     interval = setInterval(function(){
-    if(i<=24){
+    if(i<=20){
             tableauFantome.push(new FabriqueDeFantome(i));
             console.log(tableauFantome)
             i++ 

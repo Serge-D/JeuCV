@@ -23,7 +23,6 @@ var pertevie = true
 var tirseconde = true
 var interval = null
 
-
 fenetreDeJeu.style.display = 'none';
 fenetreStatut.style.display = 'none';
 gameover.style.display ="none";
@@ -114,12 +113,7 @@ var calculscore = setInterval(function(){
         clearInterval(calculscore);
         fondDuJeu.style.display = "none";
         fenetreStatut.style.display = "none";
-        youwin.style.display = "block";
-        container.remove();
-
-        setTimeout(function(){
-            open("CV.pdf");
-        },1500)
+        youwin.style.display = 
     }
     
     monscore.textContent = score;

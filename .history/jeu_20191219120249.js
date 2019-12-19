@@ -14,6 +14,7 @@ var fondDuJeu = window.document.getElementById("fond");
 var gameover = window.document.getElementById("gameover");
 var youwin = window.document.getElementById("youwin");
 var detectivemort = window.document.getElementById("detectivemort");
+var cvimage = window.document.getElementById("cvimage");
 var monscore = window.document.getElementById("monscore");
 var pointdevie = window.document.getElementById("pv");
 var commandes = window.document.getElementById("commandes");
@@ -23,7 +24,7 @@ var pertevie = true
 var tirseconde = true
 var interval = null
 
-
+cvimage.style.display = "none";
 fenetreDeJeu.style.display = 'none';
 fenetreStatut.style.display = 'none';
 gameover.style.display ="none";
@@ -118,7 +119,7 @@ var calculscore = setInterval(function(){
         container.remove();
 
         setTimeout(function(){
-            open("CV.pdf");
+            window.open("CV.jpg")
         },1500)
     }
     
