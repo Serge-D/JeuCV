@@ -1,6 +1,6 @@
 'use strict'
 
-// Mes Id stockées dans des variables
+// Déclarations des variables
 
 var boutonStart =  window.document.getElementById('boutonstart');
 var fenetreDeJeu = window.document.getElementById('fenetre');
@@ -23,7 +23,7 @@ var pertevie = true
 var tirseconde = true
 var interval = null
 
-
+// Déclaration des affichages au démarrage 
 fenetreDeJeu.style.display = 'none';
 fenetreStatut.style.display = 'none';
 gameover.style.display ="none";
@@ -31,14 +31,15 @@ youwin.style.display = "none";
 detectivemort.style.display = "none";
 commandes.style.display="none";
 
-//tableau balle et tableau fantome
+// Déclaration des variables tableau fantome et tableau balle
 var tableauBalle = [];
 var tableauFantome = [];
 
+
+// Fonction pour l'affichage de la div commandes
 window.addEventListener("load", function(){
     
-    
-    //Affichage des commandes
+   
     
    
     liencommandes.addEventListener("click",function(){
@@ -65,7 +66,7 @@ boutonStart.addEventListener("click",function(){
 
 
 
-//Sprite et Div Container 
+//Style du Sprite et de la Div Container 
 
 container.style.position="absolute";
 container.style.height="160px";
@@ -80,7 +81,8 @@ imageDetective.style.width="333px";
 
 
 
-// Score 
+// Gestion du score
+
 monscore.style.color = "white";
 monscore.style.fontSize = "1.5em";
 monscore.style.fontFamily = "'Comic Sans MS',serif";
@@ -149,14 +151,16 @@ function getRandomIntInterval(min, max) {
 
 
 
-//ReStart
+// Déclaration de la fonction pour le Restart
+
 restart.addEventListener("click",function(){
     document.location.reload();
 })
 
 
 
-// Fonction Constructeur pour génerer les fantomes
+// Fonction Constructeur pour les fantômes qui comprend : le clean des fantômes lors des collisions, la direction des fantomes, les collisions avec le personnage, l'animation des fantomes
+
  var FabriqueDeFantome = function(fantomeId){
      
     this.fantome = new Image();
@@ -253,7 +257,8 @@ restart.addEventListener("click",function(){
     return this;
 }
 
-//Fonction perte de vie
+//Fonction pour la gestion de la vie
+
 var pertedevie = function(){
 var tableauimage = pointdevie.children;
 if(tableauimage.length > 0){
@@ -286,7 +291,8 @@ if(tableauimage.length > 0){
     
 }
 
-// fonction tir 
+// fonction pour la gestion des tirs de balle
+
 var tir = function(){
     if(tirseconde){
         let balle = new FabriqueDeBalle();
@@ -299,7 +305,8 @@ var tir = function(){
 }
  
 
-//  Apparition de fantomes
+// fonction pour l'apparition de fantomes
+
  var creationFantome= function(){ 
     let i = 0
     interval = setInterval(function(){
@@ -314,7 +321,7 @@ var tir = function(){
 }
 creationFantome();
 
-// Fonction constructeur Attrape Fantome
+// Fonction constructeur des balles qui attrapent les fantomes qui comprend : le déplacement des balles, le clean des balles, la collision avec les fantomes,
 var FabriqueDeBalle = function(){
      
     this.balle = new Image();
@@ -418,14 +425,9 @@ var FabriqueDeBalle = function(){
 
 
 
+// Gestion des mouvements du personnage
 
 
-
-//Mouvement du personnage
-
-    
-
-    
 
     var imagePositionX = parseInt(container.style.left);
     var imagePositionY= parseInt(container.style.top);
