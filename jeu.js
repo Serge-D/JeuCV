@@ -12,6 +12,7 @@ var imageDetective = window.document.getElementById('img1');
 var fenetreDeFond = window.document.getElementById('fenetredefond');
 var fondDuJeu = window.document.getElementById("fond");
 var gameover = window.document.getElementById("gameover");
+var detectivemort = window.document.getElementById("detectivemort");
 var monscore = window.document.getElementById("monscore");
 var pointdevie = window.document.getElementById("pv");
 var commandes = window.document.getElementById("commandes");
@@ -24,6 +25,7 @@ var interval = null
 fenetreDeJeu.style.display = 'none';
 fenetreStatut.style.display = 'none';
 gameover.style.display ="none";
+detectivemort.style.display = "none";
 commandes.style.display="none";
 
 //tableau balle et tableau fantome
@@ -258,18 +260,15 @@ if(tableauimage.length > 0){
         clearInterval(interval);
         fondDuJeu.style.display = "none";
         gameover.style.display = "block";
+        fenetreStatut.style.display = "none";
+        detectivemort.style.display = "block";
         
         container.remove();
         while(tableauFantome.length>0){
         tableauFantome.forEach(function(elmt){
             elmt.clean()
-            console.log("---------------------------------")
-            console.log(tableauFantome)
-            console.log("---------------------------------")
         })
-        console.log("_______________________________________")
-            console.log(tableauFantome)
-            console.log("___________________________________")
+        
         
 
     }
